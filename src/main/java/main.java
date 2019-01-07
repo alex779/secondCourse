@@ -39,26 +39,30 @@ public class main {
         for (String line = scanner.nextLine(); !line.isEmpty(); line = scanner.nextLine()) {
 
             Boolean result = false;
-            final String s=line;
+            final String s = line;
+            String x = "1";
 
-            try {
-                if (line.equals(Day.valueOf(line).getDay())) {
+//            try {
+            if (line.equals(x)) {
+
+                Optional<String> queryResult = list.stream()
+                        .filter(value -> value != null)
+                        .filter(value -> value.equalsIgnoreCase(s))
+                        .findFirst();
+
+                if (queryResult.isPresent()) {
+                    System.out.println("Found " + line + " in list\nItem not added");
+
+                } else {
+                    System.out.println("Could not find " + line + " in list");
+                    list.add(line);
+                    System.out.println("Item added");
                     
-                    Optional<String> queryResult = list.stream()
-                            .filter(value -> value != null)
-                            .filter(value -> value.equalsIgnoreCase(s))
-                            .findFirst();
-                    
-                    if (queryResult.isPresent()) {
-                        System.out.println("Found " + line + " in list");
-                        list.add(line);
-                    } else {
-                        System.out.println("Could not find " + line + " in list");
-                    }
                 }
-            } catch (IllegalArgumentException e) {
-                System.out.println("Wrong input. Try again");
             }
+//            } catch (IllegalArgumentException e) {
+//                System.out.println("Wrong input. Try again");
+//            }
         }
 
 //        final String query = "MON";
@@ -73,7 +77,7 @@ public class main {
 //		}
 //
         list.forEach((t) -> {
-            System.out.println(t);
+            System.out.println("LIST " + t);
         });
     }
 }
